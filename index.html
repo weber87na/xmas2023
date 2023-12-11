@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+		/>
+		<title>Document</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script
+			src="main.js"
+			type="module"
+		></script>
+		<link
+			rel="stylesheet"
+			href="sakura.css"
+		/>
+		<style>
+			html,
+			body {
+				padding: 0;
+				margin: 0;
+				overflow-x: hidden !important;
+				overflow-y: hidden !important;
+			}
+			.sakura {
+				overflow-x: hidden !important;
+				overflow-y: hidden !important;
+			}
+			canvas {
+				overflow: hidden;
+			}
+			body {
+				height: 100vh;
+				/* background-color: black; */
+
+				/* background-color: rgb(255, 237, 240); */
+				/* background: rgb(92, 0, 0); */
+				/* background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgba(0, 0, 0, 1) 100%); */
+			}
+			.container {
+				overflow: hidden;
+				position: fixed;
+				top: 0;
+				left: 0;
+			}
+			#text-input {
+				position: fixed;
+				top: 0;
+				left: 0;
+				opacity: 0;
+				pointer-events: none;
+			}
+
+			.cd {
+				position: fixed;
+				bottom: 60px;
+				/* top: 0px; */
+				right: 0;
+				left: 0;
+				margin: auto;
+				width: 250px;
+				height: 250px;
+				border-radius: 50%;
+				background-color: black;
+				background-image: url('rose-red-80.png');
+				/* background-image: url('rose-purple-80.png'); */
+				background-repeat: no-repeat;
+				background-position: 50% 50%;
+				animation: cd-rotate 10s infinite linear;
+				z-index: -1;
+				border: 1px solid #fff;
+			}
+			@keyframes cd-rotate {
+				0% {
+					transform: rotate(0deg);
+				}
+				100% {
+					transform: rotate(360deg);
+				}
+			}
+			.paused {
+				-webkit-animation-play-state: paused;
+				-moz-animation-play-state: paused;
+				-o-animation-play-state: paused;
+				animation-play-state: paused;
+			}
+			#audio {
+				position: fixed;
+				bottom: 0;
+				/* top: 260px; */
+				left: 0;
+				right: 0px;
+				margin: 0 auto;
+				width: 250px;
+				/* z-index: -1; */
+			}
+		</style>
+	</head>
+	<body>
+		<!-- https://tympanus.net/codrops/2022/11/08/3d-typing-effects-with-three-js/ -->
+		<div
+			id="text-input"
+			contenteditable="false"
+		></div>
+		<div class="container">
+			<div class="cd paused"></div>
+			<audio
+				id="audio"
+				controls
+			>
+				<source
+					src="sound.mp3"
+					type="audio/mpeg"
+				/>
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+		<script src="sakura.js"></script>
+		<script>
+			let cdSound = document.querySelector('#audio')
+			let cd = document.querySelector('.cd')
+			cdSound.addEventListener('pause', function () {
+				cd.classList.toggle('paused')
+			})
+			cdSound.addEventListener('play', function () {
+				cd.classList.toggle('paused')
+			})
+		</script>
+	</body>
+</html>
